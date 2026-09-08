@@ -1,6 +1,6 @@
 import QtQuick
 import "../component"
 
-Text {
+StyledText {
     text: Time.time
 }

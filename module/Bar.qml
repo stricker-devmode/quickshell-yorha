@@ -6,16 +6,14 @@ import "../component"
 
 Scope {
     id: root
-    property string time
 
     Variants {
         model: Quickshell.screens
 
-        PanelWindow {
+        StyledPanelWindow {
             required property var modelData
             screen: modelData
-            color: Colour.foreground_inv
-            implicitHeight: 30
+            implicitHeight: Theme.barHeight
 
             anchors {
                 bottom: true
@@ -24,7 +22,6 @@ Scope {
             }
 
             Clock {
-                color: Colour.foreground
                 anchors.centerIn: parent
             }
         }
