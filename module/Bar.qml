@@ -1,8 +1,8 @@
 import Quickshell
 import Quickshell.Io
 import QtQuick
-import "../widget"
-import "../component"
+import qs.widget
+import qs.component
 
 Scope {
     id: root

@@ -1,5 +1,5 @@
 import Quickshell // for PanelWindow
-import "module"
+import qs.module
 
 Scope {
     Bar {}
