@@ -16,11 +16,13 @@ Scope {
             implicitHeight: Theme.barHeight
 
             anchors {
-                bottom: true
+                top: true
+                // bottom: true
                 left: true
                 right: true
             }
 
+            Cpu {}
             Clock {
                 anchors.centerIn: parent
             }
