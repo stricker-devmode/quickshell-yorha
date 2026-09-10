@@ -1,11 +1,8 @@
-import Quickshell
+import Quickshell.Widgets
 import QtQuick
 
-Rectangle {
-    color: mouse.hovered ? Theme.colourForeground : Theme.colourForeground_inv
-
-    HoverHandler {
-        id: mouse
-        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-    }
+ClippingWrapperRectangle {
+    color: Theme.colourTransparent
+    margin: Theme.rectMargin
+    radius: Theme.rectRadius
 }

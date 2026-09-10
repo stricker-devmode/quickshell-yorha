@@ -27,12 +27,34 @@ Singleton {
     property color colourBackground: '#171412'
     property color colourForeground_inv: '#2e2824'
     property color colourBackground_inv: '#f1efe5'
+    property color colourTransparent: '#00000000'
 
-    // Fonts
+    // Font and Text
     property string fontFamilyMono: "JetBrainsMono Nerd Font"
     property int fontSizePreferredPx: 17
+    property color fontColour: colourForeground
+    property color fontColourInverse: colourForeground_inv
+
+    // Rect Model
+    property real rectRadius: 4
+    property real rectMargin: 2
+    property color rectColour: colourForeground_inv
+    property color rectColourHover: colourForeground
 
     // Bar Model
     property int barHeight: 30
     property int barHeightMax: 30
+
+    // Cpu Widget
+    property int widgetCpuDecimals: 2
+    property string widgetCpuTempIcon: "󰏈"
+    property string widgetCpuUsageIcon: "󰝪"
+
+    // Gpu Widget
+    property string widgetGpuUsageIcon: "󰄧"
+    property string widgetGpuTempIcon: "󰿸"
+
+    // Mem Widget
+    property string widgetMemUsageIcon: "󰞰"
+    property string widgetMemTempIcon: "󰏈"
 }
