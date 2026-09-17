@@ -1,10 +1,8 @@
 import Quickshell.Widgets
 import QtQuick
 
-ClippingWrapperRectangle {
+StyledRect {
     color: pointer.hovered ? Theme.rectColourHover : Theme.rectColour
-    margin: Theme.rectMargin
-    radius: Theme.rectRadius
     property var pointer: mouse
 
     HoverHandler {
