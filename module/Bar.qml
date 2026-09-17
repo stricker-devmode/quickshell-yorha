@@ -24,6 +24,7 @@ Scope {
             }
             RowLayout {
                 spacing: Theme.barLayoutSpacing
+                Workspaces {}
                 Cpu {}
                 Gpu {}
                 Mem {}
