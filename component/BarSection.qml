@@ -2,7 +2,13 @@ import Quickshell.Widgets
 import QtQuick
 
 ClippingWrapperRectangle {
-    color: Theme.colourTransparent
+    color: pointer.hovered ? Theme.rectColourHover : Theme.rectColour
     margin: Theme.rectMargin
     radius: Theme.rectRadius
+    property var pointer: mouse
+
+    HoverHandler {
+        id: mouse
+        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+    }
 }
