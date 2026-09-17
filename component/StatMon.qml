@@ -21,6 +21,21 @@ Singleton {
     property real cpuTemp: 0
     property var cpuCoreTemp: []
 
+    // GPU temperatur
+    property string gpuTempPath: ""
+    property string gpuUsagePath: ""
+    property real gpuTemp: 0
+    property real gpuUsage: 0
+
+    // Memory
+    property real memUsage: 0
+    property int memTotalKiB: 0
+    property int memTotalMiB: 0
+    property int memTotalGiB: 0
+    property int memUsedKiB: 0
+    property int memUsedMiB: 0
+    property int memUsedGiB: 0
+
     FileView {
         id: cpuUsageReader
         path: "/proc/stat"
@@ -96,26 +111,26 @@ Singleton {
     }
 
     // temporary vars
-    property int _hwmonIdx: 0
-    property int _labelIdx: 1
-    property string _baseDir: ""
+    property int _hwmonIdxCpu: 0
+    property int _labelIdxCpu: 1
+    property string _baseDirCpu: ""
     property bool cpuTempPathReady: false
-    // hardware monitor device discovery
+    // hardware monitor cpu discovery
     FileView {
-        id: hwmonDiscovery
+        id: hwmonCpuDiscovery
         printErrors: false
 
         onLoaded: {
             let t = text().trim();
             if (!t) return;
 
-            if (_baseDir === "") {
+            if (_baseDirCpu === "") {
                 if (t == "coretemp" || t == "k10temp") {
-                    _baseDir = "/sys/class/hwmon/hwmon" + (_hwmonIdx - 1);
+                    _baseDirCpu = "/sys/class/hwmon/hwmon" + (_hwmonIdxCpu - 1);
                 }
-            } else if (_baseDir !== "") {
-                    root.cpuTempPath = _baseDir + "/temp" + (_labelIdx - 1) + "_input";
-                    root.cpuTempPathReady = true;
+            } else if (_baseDirCpu !== "") {
+                root.cpuTempPath = _baseDirCpu + "/temp" + (_labelIdxCpu - 1) + "_input";
+                root.cpuTempPathReady = true;
             }
         }
     }
@@ -137,27 +152,145 @@ Singleton {
     }
 
     Timer {
-        id: timerHwmonDiscovery
+        id: timerHwmonCpuDiscovery
         interval: 25
         running: !root.cpuTempPathReady
         repeat: true
         triggeredOnStart: true
 
         onTriggered: {
-            if (_baseDir === "") {
-                if (_hwmonIdx < 32) {
-                    hwmonDiscovery.path = "/sys/class/hwmon/hwmon" + _hwmonIdx++ + "/name";
+            if (_baseDirCpu === "") {
+                if (_hwmonIdxCpu < 32) {
+                    hwmonCpuDiscovery.path = "/sys/class/hwmon/hwmon" + _hwmonIdxCpu++ + "/name";
                 } else {
                     repeat = false;
                 }
             } else {
-                if (_labelIdx <= 96) {
-                    hwmonDiscovery.path = _baseDir + "/temp" + _labelIdx++ + "_label";
+                if (_labelIdxCpu <= 96) {
+                    hwmonCpuDiscovery.path = _baseDirCpu + "/temp" + _labelIdxCpu++ + "_label";
                 } else {
-                    root.cpuTempPath = _baseDir + "/temp1_input"
+                    root.cpuTempPath = _baseDirCpu + "/temp1_input"
                     root.cpuTempPathReady = true;
                 }
             }
+        }
+    }
+
+    // temporary vars
+    property int _hwmonIdxGpu: 0
+    property int _labelIdxGpu: 1
+    property string _baseDirGpu: ""
+    property bool gpuTempPathReady: false
+    // hardware monitor gpu discovery
+    FileView {
+        id: hwmonGpuDiscovery
+        printErrors: false
+
+        onLoaded: {
+            let t = text().trim();
+            if (!t) return;
+
+            if (_baseDirGpu === "") {
+                if (t == "amdgpu") {
+                    _baseDirGpu = "/sys/class/hwmon/hwmon" + (_hwmonIdxGpu - 1);
+                }
+            } else if (_baseDirGpu !== "") {
+                root.gpuUsagePath = _baseDirGpu + "/device/gpu_busy_percent";
+                root.gpuTempPath = _baseDirGpu + "/temp" + (_labelIdxGpu - 1) + "_input";
+                root.gpuTempPathReady = true;
+            }
+        }
+    }
+
+    FileView {
+        id: gpuUsageReader
+        path: root.gpuUsagePath
+        printErrors: false
+
+        onLoaded: {
+            let t = text().trim();
+            if (!t) return;
+
+            let rawPerc = parseInt(t, 10);
+            if (!isNaN(rawPerc)) root.gpuUsage = rawPerc;
+        }
+    }
+
+    FileView {
+        id: gpuTempReader
+        path: root.gpuTempPath
+        printErrors: false
+
+        onLoaded: {
+            let t = text().trim();
+            if (!t) return;
+
+            let rawTemp = parseInt(t, 10);
+            if (!isNaN(rawTemp) && rawTemp > 0) {
+                root.gpuTemp = rawTemp/1000;
+            }
+        }
+    }
+
+    Timer {
+        id: timerHwmonGpuDiscovery
+        interval: 25
+        running: !root.gpuTempPathReady
+        repeat: true
+        triggeredOnStart: true
+
+        onTriggered: {
+            if (_baseDirGpu === "") {
+                if (_hwmonIdxGpu < 32) {
+                    hwmonGpuDiscovery.path = "/sys/class/hwmon/hwmon" + _hwmonIdxGpu++ + "/name";
+                } else {
+                    repeat = false;
+                }
+            } else {
+                if (_labelIdxGpu <= 96) {
+                    hwmonGpuDiscovery.path = _baseDirGpu + "/temp" + _labelIdxGpu++ + "_label";
+                } else {
+                    root.gpuTempPath = _baseDirGpu + "/temp1_input"
+                    root.gpuTempPathReady = true;
+                }
+            }
+        }
+    }
+
+    FileView {
+        id: memUsageReader
+        path: "/proc/meminfo"
+
+        onLoaded: {
+            let t = text().trim();
+            if (!t) return;
+
+            let lines = t.split("\n");
+            let data = { memTotalKiB: 0, memAvailableKiB: 0 }
+
+            function parseKiB(line) {
+                let p = line.split(":");
+                if (p.length < 2) return 0;
+                let valStr = p[1].trim().split(/\s+/)[0];
+                let kb = parseInt(valStr, 10);
+                return isNaN(kb) ? 0 : kb;
+            }
+
+            for (let i = 0; i < lines.length; i++) {
+                let l = lines[i].trim();
+                if (l.startsWith("MemTotal:")) data.memTotalKiB = parseKiB(l);
+                else if (l.startsWith("MemAvailable:")) data.memAvailableKiB = parseKiB(l);
+            }
+
+            root.memTotalKiB = data.memTotalKiB;
+            root.memTotalMiB = data.memTotalKiB / 1024;
+            root.memTotalGiB = root.memTotalMiB / 1024;
+
+            root.memUsedKiB = data.memTotalKiB - data.memAvailableKiB;
+            root.memUsedMiB = root.memUsedKiB / 1024;
+            root.memUsedGiB = root.memUsedMiB / 1024;
+
+            root.memUsage = data.memTotalKiB > 0 ? (root.memUsedKiB / root.memTotalKiB * 100) : 0
         }
     }
 
@@ -170,7 +303,12 @@ Singleton {
         triggeredOnStart: true
         onTriggered: {
             cpuUsageReader.reload();
+            memUsageReader.reload();
             if (root.cpuTempPathReady) cpuTempReader.reload();
+            if (root.gpuTempPathReady) {
+                gpuUsageReader.reload();
+                gpuTempReader.reload();
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import QtQuick.Layouts
 import qs.widget
 import qs.component
 
@@ -21,8 +22,12 @@ Scope {
                 left: true
                 right: true
             }
-
-            Cpu {}
+            RowLayout {
+                spacing: Theme.barLayoutSpacing
+                Cpu {}
+                Gpu {}
+                Mem {}
+            }
             Clock {
                 anchors.centerIn: parent
             }

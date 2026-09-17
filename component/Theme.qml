@@ -38,23 +38,30 @@ Singleton {
     // Rect Model
     property real rectRadius: 4
     property real rectMargin: 2
-    property color rectColour: colourForeground_inv
+    property color rectColour: colourTransparent
     property color rectColourHover: colourForeground
 
     // Bar Model
+    property int barLayoutSpacing: fontSizePreferredPx / 2
     property int barHeight: 30
     property int barHeightMax: 30
 
     // Cpu Widget
+    property int widgetCpuSpacing: fontSizePreferredPx / 2
     property int widgetCpuDecimals: 2
     property string widgetCpuTempIcon: "󰏈"
     property string widgetCpuUsageIcon: "󰝪"
 
     // Gpu Widget
+    property int widgetGpuSpacing: fontSizePreferredPx / 2
+    property int widgetGpuDecimals: 0
     property string widgetGpuUsageIcon: "󰄧"
     property string widgetGpuTempIcon: "󰿸"
 
     // Mem Widget
+    property int widgetMemSpacing: fontSizePreferredPx / 2
+    property int widgetMemDecimals: 2
+    property bool widgetMemShowTotal: false
+    property string widgetMemUnit: "GiB"
     property string widgetMemUsageIcon: "󰞰"
-    property string widgetMemTempIcon: "󰏈"
 }
