@@ -2,8 +2,8 @@ import Quickshell.Widgets
 import QtQuick
 
 ClippingWrapperRectangle {
-    color: Theme.rectColour
-    margin: Theme.rectMargin
-    radius: Theme.rectRadius
+    color: Theme.rect.colour
+    margin: Theme.rect.margin
+    radius: Theme.rect.radius
 }
 

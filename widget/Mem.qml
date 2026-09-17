@@ -7,19 +7,19 @@ import qs.component
 BarSection {
     id: sec
     RowLayout {
-    spacing: Theme.widgetMemSpacing
+    spacing: Theme.mem.spacing
         StyledText {
             id: usage
-            property string icon: Theme.widgetMemUsageIcon
-            property string val: Theme.widgetMemDecimals >= 0 ? StatMon.memUsage.toFixed(Theme.widgetMemDecimals) : StatMon.memUsage
+            property string icon: Theme.mem.usageIcon
+            property string val: Theme.mem.decimals >= 0 ? StatMon.memUsage.toFixed(Theme.mem.decimals) : StatMon.memUsage
 
-            color: sec.pointer.hovered ? Theme.fontColourInverse : Theme.fontColour
+            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: `${icon} ${val}%`
         }
         StyledText {
             id: total
-            visible: Theme.widgetMemShowTotal
-            property string unit: Theme.widgetMemUnit
+            visible: Theme.mem.showTotal
+            property string unit: Theme.mem.unit
             property string val: {
                 switch (unit) {
                     case "KiB": return `${StatMon.memUsedKiB}/${StatMon.memTotalKiB}`;
@@ -29,7 +29,7 @@ BarSection {
                 }
             }
 
-            color: sec.pointer.hovered ? Theme.fontColourInverse : Theme.fontColour
+            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: `${val} ${unit}`
         }
     }

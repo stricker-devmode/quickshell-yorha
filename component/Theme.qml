@@ -6,62 +6,90 @@ import QtQuick
 Singleton {
     id: root
 
-    // Colours
-    property color colourBlack_n: '#212121'
-    property color colourBlack_l: '#625f50'
-    property color colourRed_n: '#ff3333'
-    property color colourRed_l: '#f76e6e'
-    property color colourGreen_n: '#33ff85'
-    property color colourGreen_l: '#86f9b4'
-    property color colourYellow_n: '#ffee33'
-    property color colourYellow_l: '#f9ef86'
-    property color colourBlue_n: '#808aff'
-    property color colourBlue_l: '#b6bcfb'
-    property color colourMagenta_n: '#f53df5'
-    property color colourMagenta_l: '#f5a3f5'
-    property color colourCyan_n: '#6afbfb'
-    property color colourCyan_l: '#baf7f7'
-    property color colourWhite_n: '#d4d4c4'
-    property color colourWhite_l: '#f3f3f2'
-    property color colourForeground: '#dcd8c0'
-    property color colourBackground: '#171412'
-    property color colourForeground_inv: '#2e2824'
-    property color colourBackground_inv: '#f1efe5'
-    property color colourTransparent: '#00000000'
+    property Item colour: colourPalette
+    Item {
+        id: colourPalette
+        property color black_n: '#212121'
+        property color black_l: '#625f50'
+        property color red_n: '#ff3333'
+        property color red_l: '#f76e6e'
+        property color green_n: '#33ff85'
+        property color green_l: '#86f9b4'
+        property color yellow_n: '#ffee33'
+        property color yellow_l: '#f9ef86'
+        property color blue_n: '#808aff'
+        property color blue_l: '#b6bcfb'
+        property color magenta_n: '#f53df5'
+        property color magenta_l: '#f5a3f5'
+        property color cyan_n: '#6afbfb'
+        property color cyan_l: '#baf7f7'
+        property color white_n: '#d4d4c4'
+        property color white_l: '#f3f3f2'
+        property color foreground: '#dcd8c0'
+        property color background: '#171412'
+        property color foreground_inv: '#2e2824'
+        property color background_inv: '#f1efe5'
+        property color transparent: '#00000000'
+    }
 
     // Font and Text
-    property string fontFamilyMono: "JetBrainsMono Nerd Font"
-    property int fontSizePreferredPx: 17
-    property color fontColour: colourForeground
-    property color fontColourInverse: colourForeground_inv
+    property Item font: fontModel
+    Item {
+        id: fontModel
+        property string familyMono: "JetBrainsMono Nerd Font"
+        property int sizePreferredPx: 17
+        property color colour: colourPalette.foreground
+        property color colourInverse: colourPalette.foreground_inv
+    }
 
     // Rect Model
-    property real rectRadius: 4
-    property real rectMargin: 2
-    property color rectColour: colourTransparent
-    property color rectColourHover: colourForeground
+    property Item rect: rectModel
+    Item {
+        id: rectModel
+        property real radius: 4
+        property real margin: 2
+        property color colour: colourPalette.transparent
+        property color colourHover: colourPalette.foreground
+    }
 
     // Bar Model
-    property int barLayoutSpacing: fontSizePreferredPx / 2
-    property int barHeight: 30
-    property int barHeightMax: 30
+    property Item bar: barModel
+    Item {
+        id: barModel
+        property int layoutSpacing: fontModel.sizePreferredPx / 2
+        property color colour: colourPalette.foreground_inv
+        property int heightPreferred: 30
+        property int heightMax: 30
+    }
 
     // Cpu Widget
-    property int widgetCpuSpacing: fontSizePreferredPx / 2
-    property int widgetCpuDecimals: 2
-    property string widgetCpuTempIcon: "󰏈"
-    property string widgetCpuUsageIcon: "󰝪"
+    property Item cpu: cpuModel
+    Item {
+        id: cpuModel
+        property int spacing: fontModel.sizePreferredPx / 2
+        property int decimals: 2
+        property string tempIcon: "󰏈"
+        property string usageIcon: "󰝪"
+    }
 
     // Gpu Widget
-    property int widgetGpuSpacing: fontSizePreferredPx / 2
-    property int widgetGpuDecimals: 0
-    property string widgetGpuUsageIcon: "󰄧"
-    property string widgetGpuTempIcon: "󰿸"
+    property Item gpu: gpuModel
+    Item {
+        id: gpuModel
+        property int spacing: fontModel.sizePreferredPx / 2
+        property int decimals: 0
+        property string usageIcon: "󰄧"
+        property string tempIcon: "󰿸"
+    }
 
     // Mem Widget
-    property int widgetMemSpacing: fontSizePreferredPx / 2
-    property int widgetMemDecimals: 2
-    property bool widgetMemShowTotal: false
-    property string widgetMemUnit: "GiB"
-    property string widgetMemUsageIcon: "󰞰"
+    property Item mem: memModel
+    Item {
+        id: memModel
+        property int spacing: fontModel.sizePreferredPx / 2
+        property int decimals: 2
+        property bool showTotal: false
+        property string unit: "GiB"
+        property string usageIcon: "󰞰"
+    }
 }

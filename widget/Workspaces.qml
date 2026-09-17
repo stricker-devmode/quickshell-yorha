@@ -16,7 +16,7 @@ RowLayout {
             required property int index
             property int workspaceId: UtilHyprland.workspacesByMonitor[monitor.id][index].id
             property bool focused: Hyprland.focusedMonitor?.activeWorkspace?.id === workspaceId
-            color: focused ? Theme.rectColourHover : Theme.rectColour
+            color: focused ? Theme.rect.colourHover : Theme.rect.colour
             border {
                 color: "red"
                 width: 1
@@ -29,7 +29,7 @@ RowLayout {
                 id: wsText
                 // text: Hyprland.monitorFor(screen).id
                 text: workspaceId
-                color: focused ? Theme.fontColourInverse : Theme.fontColour
+                color: focused ? Theme.font.colourInverse : Theme.font.colour
             }
         }
     }

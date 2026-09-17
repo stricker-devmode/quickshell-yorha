@@ -14,7 +14,7 @@ Scope {
         StyledPanelWindow {
             required property var modelData
             screen: modelData
-            implicitHeight: Theme.barHeight
+            implicitHeight: Theme.bar.heightPreferred
 
             anchors {
                 top: true
@@ -23,7 +23,7 @@ Scope {
                 right: true
             }
             RowLayout {
-                spacing: Theme.barLayoutSpacing
+                spacing: Theme.bar.layoutSpacing
                 Workspaces {}
                 Cpu {}
                 Gpu {}

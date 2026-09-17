@@ -7,21 +7,21 @@ import qs.component
 BarSection {
     id: sec
     RowLayout {
-    spacing: Theme.widgetCpuSpacing
+    spacing: Theme.cpu.spacing
         StyledText {
             id: usage
-            property string icon: Theme.widgetCpuUsageIcon
-            property string val: Theme.widgetCpuDecimals >= 0 ? StatMon.cpuUsage.toFixed(Theme.widgetCpuDecimals) : StatMon.cpuUsage
+            property string icon: Theme.cpu.usageIcon
+            property string val: Theme.cpu.decimals >= 0 ? StatMon.cpuUsage.toFixed(Theme.cpu.decimals) : StatMon.cpuUsage
 
-            color: sec.pointer.hovered ? Theme.fontColourInverse : Theme.fontColour
+            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: `${icon} ${val}%`
         }
         StyledText {
             id: temperature
-            property string icon: Theme.widgetCpuTempIcon
-            property string val: Theme.widgetCpuDecimals >= 0 ? StatMon.cpuTemp.toFixed(Theme.widgetCpuDecimals) : StatMon.cpuTemp
+            property string icon: Theme.cpu.tempIcon
+            property string val: Theme.cpu.decimals >= 0 ? StatMon.cpuTemp.toFixed(Theme.cpu.decimals) : StatMon.cpuTemp
 
-            color: sec.pointer.hovered ? Theme.fontColourInverse : Theme.fontColour
+            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: `${icon} ${val}󰔄`
         }
     }

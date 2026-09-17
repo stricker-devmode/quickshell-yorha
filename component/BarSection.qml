@@ -2,7 +2,7 @@ import Quickshell.Widgets
 import QtQuick
 
 StyledRect {
-    color: pointer.hovered ? Theme.rectColourHover : Theme.rectColour
+    color: pointer.hovered ? Theme.rect.colourHover : Theme.rect.colour
     property var pointer: mouse
 
     HoverHandler {
