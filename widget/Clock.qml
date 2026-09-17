@@ -1,6 +1,10 @@
 import QtQuick
 import qs.component
 
-StyledText {
-    text: Time.time
+BarSection {
+    id: sec
+    StyledText {
+        color: sec.pointer.hovered ? Theme.fontColourInverse : Theme.fontColour
+        text: Time.time
+    }
 }
