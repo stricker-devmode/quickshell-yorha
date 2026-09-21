@@ -62,12 +62,20 @@ Singleton {
         property int heightMax: 30
     }
 
+    // Global metrics settings
+    property Item metrics: metricsModel
+    Item {
+        id: metricsModel
+        property int floatDecimals: 2
+        property int floatMaxLength: 5
+    }
+
     // Cpu Widget
     property Item cpu: cpuModel
     Item {
         id: cpuModel
         property int spacing: fontModel.sizePreferredPx / 2
-        property int decimals: 2
+        property int decimals: metricsModel.floatDecimals
         property string tempIcon: "󰏈"
         property string usageIcon: "󰝪"
     }
@@ -77,7 +85,7 @@ Singleton {
     Item {
         id: gpuModel
         property int spacing: fontModel.sizePreferredPx / 2
-        property int decimals: 0
+        property int decimals: metricsModel.floatDecimals
         property string usageIcon: "󰄧"
         property string tempIcon: "󰿸"
     }
@@ -87,9 +95,10 @@ Singleton {
     Item {
         id: memModel
         property int spacing: fontModel.sizePreferredPx / 2
-        property int decimals: 2
+        property int decimals: metricsModel.floatDecimals
         property bool showTotal: false
         property string unit: "GiB"
         property string usageIcon: "󰞰"
+        property string totalIcon: "󰄦"
     }
 }

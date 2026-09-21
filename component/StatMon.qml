@@ -29,12 +29,12 @@ Singleton {
 
     // Memory
     property real memUsage: 0
-    property int memTotalKiB: 0
-    property int memTotalMiB: 0
-    property int memTotalGiB: 0
-    property int memUsedKiB: 0
-    property int memUsedMiB: 0
-    property int memUsedGiB: 0
+    property real memTotalKiB: 0
+    property real memTotalMiB: 0
+    property real memTotalGiB: 0
+    property real memUsedKiB: 0
+    property real memUsedMiB: 0
+    property real memUsedGiB: 0
 
     FileView {
         id: cpuUsageReader

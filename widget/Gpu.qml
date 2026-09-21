@@ -11,21 +11,23 @@ BarSection {
     spacing: Theme.gpu.spacing
         StyledText {
             id: usage
-            visible: StatMon.gpuTempPathReady
+            property int length: Theme.metrics.floatMaxLength
             property string icon: Theme.gpu.usageIcon
-            property string val: Theme.gpu.decimals >= 0 ? StatMon.gpuUsage.toFixed(Theme.gpu.decimals) : StatMon.gpuUsage
+            property string val: StatMon.gpuUsage.toFixed(Theme.gpu.decimals)
 
+            visible: StatMon.gpuTempPathReady
             color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
-            text: `${icon} ${val}%`
+            text: `${icon} ${val.padStart(length,"0").slice(0,length)}%`
         }
         StyledText {
             id: temperature
-            visible: StatMon.gpuTempPathReady
+            property int length: Theme.metrics.floatMaxLength
             property string icon: Theme.gpu.tempIcon
-            property string val: Theme.gpu.decimals >= 0 ? StatMon.gpuTemp.toFixed(Theme.gpu.decimals) : StatMon.gpuTemp
+            property string val: StatMon.gpuTemp.toFixed(Theme.gpu.decimals)
 
+            visible: StatMon.gpuTempPathReady
             color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
-            text: `${icon} ${val}󰔄`
+            text: `${icon} ${val.padStart(length,"0").slice(0,length)}󰔄`
         }
     }
 }

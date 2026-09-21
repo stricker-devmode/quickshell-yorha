@@ -10,19 +10,21 @@ BarSection {
     spacing: Theme.cpu.spacing
         StyledText {
             id: usage
+            property int length: Theme.metrics.floatMaxLength
             property string icon: Theme.cpu.usageIcon
-            property string val: Theme.cpu.decimals >= 0 ? StatMon.cpuUsage.toFixed(Theme.cpu.decimals) : StatMon.cpuUsage
+            property string val: StatMon.cpuUsage.toFixed(Theme.cpu.decimals)
 
             color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
-            text: `${icon} ${val}%`
+            text: `${icon} ${val.padStart(length,"0").slice(0,length)}%`
         }
         StyledText {
             id: temperature
+            property int length: Theme.metrics.floatMaxLength
             property string icon: Theme.cpu.tempIcon
-            property string val: Theme.cpu.decimals >= 0 ? StatMon.cpuTemp.toFixed(Theme.cpu.decimals) : StatMon.cpuTemp
+            property string val: StatMon.cpuTemp.toFixed(Theme.cpu.decimals)
 
             color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
-            text: `${icon} ${val}󰔄`
+            text: `${icon} ${val.padStart(length,"0").slice(0,length)}󰔄`
         }
     }
 }
