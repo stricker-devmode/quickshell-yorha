@@ -15,7 +15,8 @@ RowLayout {
         StyledRect {
             required property int index
             property HyprlandWorkspace ws: UtilHyprland.workspacesByMonitor[monitorId][index] 
-            property bool focused: ws.id === UtilHyprland.activeWorkspaceId
+            property bool focused: ws !== null && ws.id === UtilHyprland.activeWorkspaceId
+            property string name: ws !== null ? ws.name : "default"
             color: focused ? Theme.rect.colourHover : Theme.rect.colour
             border {
                 color: "red"
@@ -23,7 +24,7 @@ RowLayout {
             }
             
             StyledText {
-                text: Theme.workspace.format[ws.name] || Theme.workspace.format["default"]
+                text: Theme.workspace.format[name] || Theme.workspace.format["default"]
                 color: focused ? Theme.font.colourInverse : Theme.font.colour
             }
         }
