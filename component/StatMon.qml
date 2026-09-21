@@ -180,6 +180,7 @@ Singleton {
     property int _hwmonIdxGpu: 0
     property int _labelIdxGpu: 1
     property string _baseDirGpu: ""
+    property bool gpuUsagePathReady: false
     property bool gpuTempPathReady: false
     // hardware monitor gpu discovery
     FileView {
@@ -196,6 +197,7 @@ Singleton {
                 }
             } else if (_baseDirGpu !== "") {
                 root.gpuUsagePath = _baseDirGpu + "/device/gpu_busy_percent";
+                root.gpuUsagePathReady = true;
                 root.gpuTempPath = _baseDirGpu + "/temp" + (_labelIdxGpu - 1) + "_input";
                 root.gpuTempPathReady = true;
             }
@@ -235,7 +237,7 @@ Singleton {
     Timer {
         id: timerHwmonGpuDiscovery
         interval: 25
-        running: !root.gpuTempPathReady
+        running: !root.gpuUsagePathReady || !root.gpuTempPathReady
         repeat: true
         triggeredOnStart: true
 
