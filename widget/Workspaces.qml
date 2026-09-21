@@ -6,29 +6,24 @@ import qs.component
 
 
 RowLayout {
-    property HyprlandMonitor monitor: Hyprland.monitorFor(screen)
+    property int monitorId: Hyprland.monitorFor(screen).id
     spacing: 0
 
     Repeater {
-        model: UtilHyprland.workspacesByMonitor[monitor.id].length
+        model: UtilHyprland.workspacesByMonitor[monitorId].length
 
         StyledRect {
             required property int index
-            property int workspaceId: UtilHyprland.workspacesByMonitor[monitor.id][index].id
-            property bool focused: Hyprland.focusedMonitor?.activeWorkspace?.id === workspaceId
+            property HyprlandWorkspace ws: UtilHyprland.workspacesByMonitor[monitorId][index] 
+            property bool focused: ws.id === UtilHyprland.activeWorkspaceId
             color: focused ? Theme.rect.colourHover : Theme.rect.colour
             border {
                 color: "red"
                 width: 1
             }
-
-            // implicitWidth: wsText.implicitWidth
-            // implicitHeight: wsText.implicitHeight
             
             StyledText {
-                id: wsText
-                // text: Hyprland.monitorFor(screen).id
-                text: workspaceId
+                text: Theme.workspace.format[ws.name] || Theme.workspace.format["default"]
                 color: focused ? Theme.font.colourInverse : Theme.font.colour
             }
         }
