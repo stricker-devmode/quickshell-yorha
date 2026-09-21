@@ -6,7 +6,7 @@ import qs.component
 
 BarSection {
     id: sec
-    visible: usage.visible || temperature.visible
+    visible: StatMon.gpuUsagePathReady || StatMon.gpuTempPathReady
     RowLayout {
     spacing: Theme.gpu.spacing
         StyledText {
@@ -15,7 +15,7 @@ BarSection {
             property string icon: Theme.gpu.usageIcon
             property string val: StatMon.gpuUsage.toFixed(Theme.gpu.decimals)
 
-            visible: StatMon.gpuTempPathReady
+            visible: StatMon.gpuUsagePathReady
             color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: `${icon} ${val.padStart(length,"0").slice(0,length)}%`
         }
