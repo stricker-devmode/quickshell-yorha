@@ -56,6 +56,27 @@ Singleton {
         property color colourHover: colourPalette.foreground
     }
 
+    // Battery Model
+    property Item bat: batteryModel
+    Item {
+        id: batteryModel
+        property int decimals: metricsModel.floatDecimals
+        property var formatIcon: {
+            "ac-adapter-symbolic":                "󱐥",
+            "battery-caution-charging-symbolic":  "󰢟",
+            "battery-caution-symbolic":           "󱃍",
+            "battery-empty-symbolic":             "󰂎",
+            "battery-full-charged-symbolic":      "󰂄",
+            "battery-full-charging-symbolic":     "󱊦",
+            "battery-full-symbolic":              "󱊣",
+            "battery-good-charging-symbolic":     "󱊥",
+            "battery-good-symbolic":              "󱊢",
+            "battery-low-charging-symbolic":      "󱊤",
+            "battery-low-symbolic":               "󱊡",
+            "battery-missing-symbolic":           "󰂑",
+        }
+    }
+
     // Bar Model
     property Item bar: barModel
     Item {
