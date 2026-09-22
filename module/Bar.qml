@@ -12,6 +12,7 @@ Scope {
         model: Quickshell.screens
 
         StyledPanelWindow {
+            id: bar
             required property var modelData
             screen: modelData
             implicitHeight: Theme.bar.heightPreferred
@@ -22,15 +23,32 @@ Scope {
                 left: true
                 right: true
             }
+
             RowLayout {
-                spacing: Theme.bar.layoutSpacing
-                Workspaces {}
-                Cpu {}
-                Gpu {}
-                Mem {}
-            }
-            Clock {
-                anchors.centerIn: parent
+                id: sections
+                spacing: 0
+                anchors.fill: parent
+                uniformCellSizes: true
+
+                RowLayout {
+                    id: left
+                    spacing: Theme.bar.layoutSpacing
+                    Layout.alignment: Qt.AlignLeft
+                    Layout.fillWidth: true
+
+                    Workspaces {}
+                    Cpu {}
+                    Gpu {}
+                    Mem {}
+                }
+                Clock { Layout.alignment: Qt.AlignCenter }
+                RowLayout {
+                    id: right
+                    spacing: Theme.bar.layoutSpacing
+                    Layout.alignment: Qt.AlignRight
+                    Layout.fillWidth: true
+
+                }
             }
         }
     }

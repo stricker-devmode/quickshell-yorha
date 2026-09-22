@@ -10,18 +10,18 @@ RowLayout {
     spacing: 0
 
     Repeater {
-        model: UtilHyprland.workspacesByMonitor[monitorId].length
+        model: UtilHyprland.workspacesByMonitor[monitorId]?.length ?? 0
+        Layout.alignment: Qt.AlignCenter
 
         StyledRect {
             required property int index
             property HyprlandWorkspace ws: UtilHyprland.workspacesByMonitor[monitorId][index] 
             property bool focused: ws !== null && ws.id === UtilHyprland.activeWorkspaceId
             property string name: ws !== null ? ws.name : "default"
+
+            leftMargin: topMargin * 3
+            rightMargin: leftMargin
             color: focused ? Theme.rect.colourHover : Theme.rect.colour
-            border {
-                color: "red"
-                width: 1
-            }
             
             StyledText {
                 text: Theme.workspace.format[name] || Theme.workspace.format["default"]

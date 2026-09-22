@@ -48,6 +48,10 @@ Singleton {
         id: rectModel
         property real radius: 4
         property real margin: 2
+        property real topMargin: 2
+        property real bottomMargin: 2
+        property real leftMargin: 4
+        property real rightMargin: 4
         property color colour: colourPalette.transparent
         property color colourHover: colourPalette.foreground
     }
@@ -106,23 +110,23 @@ Singleton {
     Item {
         id: wsModel
         property var format: {
-            "1": "一",
-            "2": "二",
-            "3": "三",
-            "4": "四",
-            "5": "五",
-            "6": "六",
-            "7": "七",
-            "8": "八",
-            "9": "九",
-            "10": "十",
-            "special:G1": "󰎦",
-            "special:G2": "󰎩",
-            "special:G3": "󰎬",
-            "special:G4": "󰎮",
-            "special:G5": "󰎰",
-            "special:G6": "󰎵",
-            "default": ""
+            "1":           "一",
+            "2":           "二",
+            "3":           "三",
+            "4":           "四",
+            "5":           "五",
+            "6":           "六",
+            "7":           "七",
+            "8":           "八",
+            "9":           "九",
+            "10":          "十",
+            "special:G1":  "󰎦",
+            "special:G2":  "󰎩",
+            "special:G3":  "󰎬",
+            "special:G4":  "󰎮",
+            "special:G5":  "󰎰",
+            "special:G6":  "󰎵",
+            "default":     "",
         }
     }
 }
