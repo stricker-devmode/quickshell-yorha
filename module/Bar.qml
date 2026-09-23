@@ -49,6 +49,7 @@ Scope {
                     Layout.fillWidth: true
 
                     Battery {}
+                    BarSection { StyledText { text: "Dummy"}}
                 }
             }
         }
