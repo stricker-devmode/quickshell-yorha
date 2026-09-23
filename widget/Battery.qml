@@ -9,7 +9,7 @@ BarSection {
     StyledText {
         property UPowerDevice dev: UPower.displayDevice
         property real val: (100 * dev.energy / dev.energyCapacity).toFixed(Theme.bat.decimals)
-        property string icon: Theme.bat.formatIcon[dev.iconName]
+        property string icon: Theme.bat.formatIcon[dev.iconName] || ""
 
         color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
         text: `${icon} ${val}%`
