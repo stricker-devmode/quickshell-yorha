@@ -141,12 +141,12 @@ Singleton {
             "8":           "八",
             "9":           "九",
             "10":          "十",
-            "special:G1":  "󰎦",
-            "special:G2":  "󰎩",
-            "special:G3":  "󰎬",
-            "special:G4":  "󰎮",
-            "special:G5":  "󰎰",
-            "special:G6":  "󰎵",
+            "special:G1":  "Ⅰ",
+            "special:G2":  "Ⅱ",
+            "special:G3":  "Ⅲ",
+            "special:G4":  "Ⅳ",
+            "special:G5":  "Ⅴ",
+            "special:G6":  "Ⅵ",
             "default":     "",
         }
     }
