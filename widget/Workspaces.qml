@@ -19,8 +19,7 @@ RowLayout {
             property bool focused: ws !== null && ws.id === UtilHyprland.activeWorkspaceId
             property string name: ws !== null ? ws.name : "default"
 
-            leftMargin: topMargin * 3
-            rightMargin: leftMargin
+            Layout.minimumWidth: implicitHeight
             color: focused ? Theme.rect.colourHover : Theme.rect.colour
             
             StyledText {
