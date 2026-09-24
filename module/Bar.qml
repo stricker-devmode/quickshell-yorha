@@ -48,8 +48,9 @@ Scope {
                     Layout.alignment: Qt.AlignRight
                     Layout.fillWidth: true
 
+                    Audio {}
                     Battery {}
-                    BarSection { StyledText { text: "Dummy"}}
+                    Powermenu {}
                 }
             }
         }

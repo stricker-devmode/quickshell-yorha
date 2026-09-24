@@ -89,6 +89,34 @@ Singleton {
         property int heightMax: 30
     }
 
+    // Audio Widget
+    property Item audio: audioModel
+    Item {
+        id: audioModel
+        property real spacing: fontModel.iconSpacing
+        property var formatIcon: {
+            "missing": "󰖁",
+            "muted":   "󰝟",
+            "low":     "󰕿",
+            "medium":  "󰖀",
+            "high":    "󰕾",
+        }
+    }
+
+    // Powermenu widget
+    property Item powermenu: pwmModel
+    Item {
+        id: pwmModel
+        property real spacing: fontModel.iconSpacing
+        property var formatIcon: {
+            "menu":      "󰐦",
+            "lock":      "󰍁",
+            "reboot":    "󰤁",
+            "shutdown":  "󰐥",
+            "suspend":   "󰤄",
+        }
+    }
+
     // Global metrics settings
     property Item metrics: metricsModel
     Item {
