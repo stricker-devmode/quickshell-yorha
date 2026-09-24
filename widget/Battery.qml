@@ -6,12 +6,20 @@ BarSection {
     id: sec
     visible: UPower.displayDevice.ready && UPowerDeviceType.toString(UPower.displayDevice.type) === "Battery"
 
-    StyledText {
+    Row {
+        id: bat
+        spacing: Theme.bat.spacing
         property UPowerDevice dev: UPower.displayDevice
         property real val: (100 * dev.energy / dev.energyCapacity).toFixed(Theme.bat.decimals)
         property string icon: Theme.bat.formatIcon[dev.iconName] || ""
 
-        color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
-        text: `${icon} ${val}%`
+        StyledText {
+            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+            text: bat.icon
+        }
+        StyledText {
+            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+            text: `${bat.val}%`
+        }
     }
 }

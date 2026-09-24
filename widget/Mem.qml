@@ -8,18 +8,26 @@ BarSection {
     id: sec
     RowLayout {
     spacing: Theme.mem.spacing
-        StyledText {
+        Row {
             id: usage
+            spacing: Theme.mem.spacing
             property int length: Theme.metrics.floatMaxLength
             property string icon: Theme.mem.usageIcon
             property string val: StatMon.memUsage.toFixed(Theme.mem.decimals)
 
-            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
-            text: `${icon} ${val.padStart(length,"0").slice(0,length)}%`
+            StyledText {
+                color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+                text: usage.icon
+            }
+            StyledText {
+                color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+                text: `${usage.val.padStart(usage.length,"0").slice(0,usage.length)}%`
+            }
         }
-        StyledText {
+        Row {
             id: total
             visible: Theme.mem.showTotal
+            spacing: Theme.mem.spacing
             property string icon: Theme.mem.totalIcon
             property string unit: Theme.mem.unit
             property string val: {
@@ -31,8 +39,14 @@ BarSection {
                 }
             }
 
+        StyledText {
             color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
-            text: `${icon} ${val} ${unit}`
+            text: total.icon
+        }
+        StyledText {
+            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+            text: `${total.val} ${total.unit}`
+        }
         }
     }
 }

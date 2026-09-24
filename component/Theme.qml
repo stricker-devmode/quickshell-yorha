@@ -36,10 +36,11 @@ Singleton {
     property Item font: fontModel
     Item {
         id: fontModel
-        property string familyMono: "JetBrainsMono Nerd Font"
-        property int sizePreferredPx: 17
         property color colour: colourPalette.foreground
         property color colourInverse: colourPalette.foreground_inv
+        property int sizePreferredPx: 17
+        property real iconSpacing: sizePreferredPx / 4
+        property string familyMono: "JetBrainsMono Nerd Font"
     }
 
     // Rect Model
@@ -61,6 +62,7 @@ Singleton {
     Item {
         id: batteryModel
         property int decimals: metricsModel.floatDecimals
+        property real spacing: fontModel.iconSpacing
         property var formatIcon: {
             "ac-adapter-symbolic":                "󱐥",
             "battery-caution-charging-symbolic":  "󰢟",
@@ -81,7 +83,7 @@ Singleton {
     property Item bar: barModel
     Item {
         id: barModel
-        property int layoutSpacing: fontModel.sizePreferredPx / 2
+        property real layoutSpacing: fontModel.iconSpacing
         property color colour: colourPalette.foreground_inv
         property int heightPreferred: 30
         property int heightMax: 30
@@ -99,8 +101,8 @@ Singleton {
     property Item cpu: cpuModel
     Item {
         id: cpuModel
-        property int spacing: fontModel.sizePreferredPx / 2
         property int decimals: metricsModel.floatDecimals
+        property real spacing: fontModel.iconSpacing
         property string tempIcon: "󰏈"
         property string usageIcon: "󰝪"
     }
@@ -109,22 +111,22 @@ Singleton {
     property Item gpu: gpuModel
     Item {
         id: gpuModel
-        property int spacing: fontModel.sizePreferredPx / 2
         property int decimals: metricsModel.floatDecimals
-        property string usageIcon: "󰄧"
+        property real spacing: fontModel.iconSpacing
         property string tempIcon: "󰿸"
+        property string usageIcon: "󰄧"
     }
 
     // Mem Widget
     property Item mem: memModel
     Item {
         id: memModel
-        property int spacing: fontModel.sizePreferredPx / 2
-        property int decimals: metricsModel.floatDecimals
         property bool showTotal: false
+        property int decimals: metricsModel.floatDecimals
+        property real spacing: fontModel.iconSpacing
+        property string totalIcon: "󰄦"
         property string unit: "GiB"
         property string usageIcon: "󰞰"
-        property string totalIcon: "󰄦"
     }
 
     property Item workspace: wsModel
