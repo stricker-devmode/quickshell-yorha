@@ -89,6 +89,24 @@ Singleton {
         property int heightMax: 30
     }
 
+    // Networking widget
+    property Item net: netModel
+    Item {
+        id: netModel
+        property real spacing: fontModel.iconSpacing
+        property var formatIcon: {
+            "eth-link-connected": "󰈀",
+            "eth-link-disconnected": "󰈁",
+            "eth-nolink": "󰈂",
+            "wifi-disabled": "󰤮",
+            "wifi-enabled-connected-0": "󰤯",
+            "wifi-enabled-connected-1": "󰤟",
+            "wifi-enabled-connected-2": "󰤢",
+            "wifi-enabled-connected-3": "󰤥",
+            "wifi-enabled-connected-4": "󰤨",
+            "wifi-enabled-disconnected": "󰤫",
+        }
+    }
     // Audio Widget
     property Item audio: audioModel
     Item {

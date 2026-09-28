@@ -48,6 +48,7 @@ Scope {
                     Layout.alignment: Qt.AlignRight
                     Layout.fillWidth: true
 
+                    Network {}
                     Audio {}
                     Battery {}
                     Powermenu {}
