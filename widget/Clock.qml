@@ -1,5 +1,6 @@
 import QtQuick
 import qs.component
+import qs.service
 
 BarSection {
     id: sec

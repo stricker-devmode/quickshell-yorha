@@ -3,12 +3,13 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import qs.component
+import qs.service
 
 
 Row {
     id: sec
     property int monitorId: Hyprland.monitorFor(screen).id
-    property int numWs: UtilHyprland.workspacesByMonitor[monitorId]?.length ?? 0
+    property int numWs: Hypr.workspacesByMonitor[monitorId]?.length ?? 0
     spacing: 0
 
     Repeater {
@@ -17,8 +18,8 @@ Row {
 
         StyledRect {
             required property int index
-            property HyprlandWorkspace ws: UtilHyprland.workspacesByMonitor[sec.monitorId][index]
-            property bool focused: ws === null ? false : (ws.focused || ws.id === UtilHyprland.activeWorkspaceId)
+            property HyprlandWorkspace ws: Hypr.workspacesByMonitor[sec.monitorId][index]
+            property bool focused: ws === null ? false : (ws.focused || ws.id === Hypr.activeWorkspaceId)
             property string name: ws !== null ? ws.name : "default"
 
             width: Math.max(implicitHeight, child?.implicitWidth ?? 0)
