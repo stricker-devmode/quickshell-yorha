@@ -10,14 +10,14 @@ BarSection {
         property string icon: Theme.powermenu.formatIcon["menu"]
 
         StyledText {
-            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+            color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: menu.icon
             font.bold: true
         }
         StyledText {
-            visible: sec.pointer.hovered
-            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
-            text: "powermenu"
+            // visible: sec.hovered
+            color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
+            text: sec.hovered ? "powermenu" : ""
         }
     }
 }

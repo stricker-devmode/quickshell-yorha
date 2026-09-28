@@ -9,4 +9,11 @@ ClippingWrapperRectangle {
     leftMargin: Theme.rect.leftMargin
     rightMargin: Theme.rect.rightMargin
     radius: Theme.rect.radius
+
+    Behavior on color {
+        ColorAnimation {
+            easing.type: Easing.InOutQuad
+            duration: 200
+        }
+    }
 }

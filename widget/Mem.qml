@@ -17,11 +17,11 @@ BarSection {
             property string val: StatMon.memUsage.toFixed(Theme.mem.decimals)
 
             StyledText {
-                color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+                color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
                 text: usage.icon
             }
             StyledText {
-                color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+                color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
                 text: `${usage.val.padStart(usage.length,"0").slice(0,usage.length)}%`
             }
         }
@@ -41,11 +41,11 @@ BarSection {
             }
 
         StyledText {
-            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+            color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: total.icon
         }
         StyledText {
-            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+            color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: `${total.val} ${total.unit}`
         }
         }

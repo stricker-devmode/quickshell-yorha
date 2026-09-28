@@ -5,7 +5,7 @@ import qs.service
 BarSection {
     id: sec
     StyledText {
-        color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+        color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
         text: Time.time
     }
 }

@@ -60,13 +60,12 @@ Row {
             Row {
                 spacing: Theme.net.spacing
                 StyledText {
-                    color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+                    color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
                     text: sec.icon
                 }
                 StyledText {
-                    visible: sec.pointer.hovered
-                    color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
-                    text: sec.name
+                    color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
+                    text: sec.hovered ? sec.name : ""
                 }
             }
         }

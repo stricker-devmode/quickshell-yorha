@@ -14,11 +14,11 @@ BarSection {
         property string icon: Theme.bat.formatIcon[dev.iconName] || ""
 
         StyledText {
-            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+            color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: bat.icon
         }
         StyledText {
-            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+            color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: `${bat.val}%`
         }
     }

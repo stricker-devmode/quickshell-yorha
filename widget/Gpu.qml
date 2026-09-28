@@ -19,11 +19,11 @@ BarSection {
             property string val: StatMon.gpuUsage.toFixed(Theme.gpu.decimals)
 
             StyledText {
-                color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+                color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
                 text: usage.icon
             }
             StyledText {
-                color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+                color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
                 text: `${usage.val.padStart(usage.length,"0").slice(0,usage.length)}%`
             }
         }
@@ -36,11 +36,11 @@ BarSection {
             property string val: StatMon.gpuTemp.toFixed(Theme.gpu.decimals)
 
             StyledText {
-                color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+                color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
                 text: temp.icon
             }
             StyledText {
-                color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+                color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
                 text: `${temp.val.padStart(temp.length,"0").slice(0,temp.length)}󰔄`
             }
         }

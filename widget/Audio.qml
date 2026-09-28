@@ -25,12 +25,12 @@ BarSection {
         PwObjectTracker { objects: [ audio.sink ] }
 
         StyledText {
-            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+            color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: audio.icon
         }
         StyledText {
             visible: !audio.muted
-            color: sec.pointer.hovered ? Theme.font.colourInverse : Theme.font.colour
+            color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
             text: `${audio.val.toFixed(0).padStart(2,"0").slice(0,3)}%`
         }
     }
