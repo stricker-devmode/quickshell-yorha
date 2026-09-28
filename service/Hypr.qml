@@ -18,33 +18,34 @@ Singleton {
            ws = Hyprland.workspaces.values.map(e => e).sort((a, b) => a.id - b.id); 
         }
         let retVar = [];
-        let _mon;
-        for (_mon of Hyprland.monitors.values) {
-            let listWs = [];
-            let _ws;
-            // normal workspaces
-            for (_ws of ws) {
-                if (_ws.id < 0) {
-                    continue;
-                }
-                else if (_ws.monitor === null && Hyprland.focusedMonitor.id === _mon.id) {
-                    listWs.push(_ws);
-                }
-                else if (_ws.monitor !== null && _ws.monitor.id === _mon.id) {
-                    listWs.push(_ws);
-                }
+        let _focusedMon = Hyprland.focusedMonitor?.id ?? 0;
+        let _mons = Hyprland.monitors.values;
+        let _monMax = _mons.length;
+        for (let i = 0; i < _monMax; i++) {
+            retVar.push([]);
+        }
+        let _ws;
+        // normal workspaces
+        for (_ws of ws) {
+            if (_ws.id < 0) {
+                continue;
             }
-            // special workspaces
-            for (_ws of ws) {
-                if (_ws.id > 0) break; // special ws.id is always negative
-                if (_ws.monitor === null && Hyprland.focusedMonitor.id === _mon.id) {
-                    listWs.push(_ws);
-                }
-                else if (_ws.monitor !== null && _ws.monitor.id === _mon.id) {
-                    listWs.push(_ws);
-                }
+            else if (_ws.monitor === null) {
+                retVar[_focusedMon].push(_ws);
             }
-            retVar.push(listWs);
+            else if (_ws.monitor !== null) {
+                retVar[_ws.monitor.id].push(_ws);
+            }
+        }
+        // special workspaces
+        for (_ws of ws) {
+            if (_ws.id > 0) break; // special ws.id is always negative
+            if (_ws.monitor === null) {
+                retVar[_focusedMon].push(_ws);
+            }
+            else if (_ws.monitor !== null) {
+                retVar[_ws.monitor.id].push(_ws);
+            }
         }
         return retVar;
     }
@@ -56,6 +57,15 @@ Singleton {
     property int _findWsId: 0
     function findWorkspaceById(value, index, array) {
         return value.id === hypr._findWsId;
+    }
+
+    onWorkspacesChanged: {
+        // let mon;
+        // let mons = Hyprland.monitors.values;
+        // for (mon of mons) {
+        //     console.log(mon.id, mon.name, mon.focused);
+        // }
+        hypr.workspacesByMonitor = hypr.resolveWorkspaces();
     }
 
     Connections {
@@ -95,9 +105,5 @@ Singleton {
                 }
             }
         }
-    }
-
-    onWorkspacesChanged: {
-        hypr.workspacesByMonitor = hypr.resolveWorkspaces();
     }
 }
