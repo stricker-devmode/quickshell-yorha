@@ -113,11 +113,11 @@ Singleton {
         id: audioModel
         property real spacing: fontModel.iconSpacing
         property var formatIcon: {
-            "missing": "󰖁",
-            "muted":   "󰝟",
-            "low":     "󰕿",
-            "medium":  "󰖀",
-            "high":    "󰕾",
+            "missing":  "󰖁",
+            "muted":    "󰝟",
+            "0":        "󰕿",
+            "1":        "󰖀",
+            "2":        "󰕾",
         }
     }
 

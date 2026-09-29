@@ -1,37 +1,46 @@
 import QtQuick
+import Qt.labs.animation
 import Quickshell.Services.Pipewire
 import qs.component
 
 BarSection {
     id: sec
     visible: Pipewire.ready
+    PwObjectTracker { objects: [ sec.sink ] }
+
+    property PwNode sink: Pipewire.defaultAudioSink
+    property real val: sink.audio.volume * 100
+    property bool muted: sink.audio.muted
+    property string status: {
+        if (!sec.sink?.ready) { return "missing"; }
+        if (sec.muted) { return "muted"; }
+        return Math.min(Math.floor(val/33),2)
+    }
+    property string icon: Theme.audio.formatIcon[status] || ""
+
+    onLeftClicked: { sink.audio.muted = !sink.audio.muted }
+    onValChanged: { sink.audio.volume = val / 100 }
+    BoundaryRule on val {
+        minimum: 0
+        maximum: 100
+    }
+    WheelHandler {
+        target: sec
+        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+        property: "val"
+    }
 
     Row {
-        id: audio
         spacing: Theme.audio.spacing
-        visible: Pipewire.ready
-        property PwNode sink: Pipewire.defaultAudioSink
-        property real val: sink.audio.volume * 100
-        property bool muted: sink.audio.muted
-        property string status: {
-            if (!audio.sink?.ready) { return "missing"; }
-            if (audio.muted) { return "muted"; }
-            if (audio.val <= 33) { return "low"; }
-            else if (audio.val < 66) { return "medium"; }
-            else if (audio.val > 66) { return "high"; }
-        }
-        property string icon: Theme.audio.formatIcon[status] || ""
-
-        PwObjectTracker { objects: [ audio.sink ] }
 
         StyledText {
             color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
-            text: audio.icon
+            text: sec.icon
         }
         StyledText {
-            visible: !audio.muted
+            visible: !sec.muted
             color: sec.hovered ? Theme.font.colourInverse : Theme.font.colour
-            text: `${audio.val.toFixed(0).padStart(2,"0").slice(0,3)}%`
+            text: `${sec.val.toFixed(0).padStart(2,"0").slice(0,3)}%`
         }
     }
 }

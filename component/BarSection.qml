@@ -4,10 +4,10 @@ import QtQuick
 StyledRect {
     id: root
     color: hovered ? Theme.rect.colourHover : Theme.rect.colour
+    signal leftClicked
+    signal rightClicked
     property bool activated: false
     property bool hovered: hoverHandler.hovered
-    property var onLeftClick: function() {}
-    property var onRightClick: function() {}
 
     HoverHandler {
         id: hoverHandler
@@ -16,11 +16,11 @@ StyledRect {
     TapHandler {
         id: leftClickHandler
         acceptedButtons: Qt.LeftButton
-        onTapped: root.onLeftClick
+        onTapped: root.leftClicked()
     }
     TapHandler {
         id: rightClickHandler
         acceptedButtons: Qt.RightButton
-        onTapped: root.onRightClick
+        onTapped: root.rightClicked()
     }
 }
